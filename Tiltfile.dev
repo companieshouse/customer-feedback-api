@@ -1,0 +1,20 @@
+local_resource(
+  name = 'dev:customer-feedback-api',
+  cmd = 'mvn clean compile',
+  deps = ['src/main']
+)
+update_settings(suppress_unused_image_warnings=["docker-chs-development-customer-feedback-api"])
+custom_build(
+  ref = 'docker-chs-development-customer-feedback-api',
+  command = 'make all',
+  skips_local_docker = False,
+  live_update = [
+    sync(
+      local_path = './target/classes',
+      remote_path = '/app/classes'
+    ),
+    restart_container()
+  ],
+  deps = ['./target/classes']
+)
+
