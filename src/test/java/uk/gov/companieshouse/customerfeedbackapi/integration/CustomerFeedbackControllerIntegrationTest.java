@@ -17,7 +17,7 @@ import uk.gov.companieshouse.customerfeedbackapi.model.dto.CustomerFeedbackDTO;
 import uk.gov.companieshouse.customerfeedbackapi.repository.CustomerFeedbackRepository;
 import uk.gov.companieshouse.customerfeedbackapi.utils.Helper;
 
-@SpringBootTest
+@SpringBootTest(properties="send-email-flag=false")
 @AutoConfigureMockMvc
 class CustomerFeedbackControllerIntegrationTest {
 
@@ -26,15 +26,6 @@ class CustomerFeedbackControllerIntegrationTest {
   @Autowired private MockMvc mvc;
 
   @MockBean protected CustomerFeedbackRepository customerFeedbackRepository;
-
-  //        @MockBean
-  //        protected TransactionService transactionService;
-  //
-  //        @MockBean
-  //        protected PrivateDataRetrievalService privateDataRetrievalService;
-  //
-  //        @MockBean
-  //        protected UserAuthenticationInterceptor userAuthenticationInterceptor;
 
   @Test
   void testCreateCustomerFeedbackSuccessTest() throws Exception {
