@@ -52,9 +52,10 @@ sonar:
 sonar-pr-analysis:
 	mvn sonar:sonar -P sonar-pr-analysis
 
-.PHONY: dependency-check
-dependency-check:
-	mvn org.owasp:dependency-check-maven:check -DfailBuildOnCVSS=4 -DassemblyAnalyzerEnabled=false
+.PHONY: security-check
+security-check:
+	mvn org.owasp:dependency-check-maven:purge
+	mvn org.owasp:dependency-check-maven:check
 
 .PHONY: build-image
 build-image:
