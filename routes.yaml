@@ -1,7 +1,0 @@
-app_name: customer-feedback-api
-group: api
-
-weight: 900
-routes:
-  1: ^/customer-feedback
-  2: ^/customer-feedback/healthcheck
