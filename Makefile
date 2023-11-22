@@ -65,3 +65,6 @@ build-image:
 all: clean build build-image
 	@echo "Running all"
 
+.PHONY: run
+run:
+	docker run -it --rm $(artifact_name)
