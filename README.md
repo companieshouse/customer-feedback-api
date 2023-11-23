@@ -128,3 +128,4 @@ and the  chs-kafka-api logging shows that the customer feedback was received
 {"context":"cztxcdJJFuyZHRCovgpV","created":"2023-11-10T14:23:13.373066211Z","data":{"app_id":"api_ch_gov_uk.create_feedback","created":"2023-11-10T14:23:13","email_address":"","message":"EmailSendQueue - email send request enqueued in Kafka","message_id":"5e609b1f-550c-4bfa-80c9-76783326acb0","message_type":"customer-feedback","offset":13,"partition":0,"topic":"email-send"},"event":"trace","namespace":"chs-kafka-api"}
 {"context":"cztxcdJJFuyZHRCovgpV","created":"2023-11-10T14:23:13.373223685Z","data":{"duration":6037047,"end":"2023-11-10T14:23:13.373221309Z","method":"POST","path":"/send-email","start":"2023-11-10T14:23:13.367184271Z","status":200},"event":"request","namespace":"chs-kafka-api"} 
 ```
+
