@@ -1,4 +1,4 @@
-FROM 416670754337.dkr.ecr.eu-west-2.amazonaws.com/ci-corretto-build-17:latest
+FROM 416670754337.dkr.ecr.eu-west-2.amazonaws.com/ci-corretto-build-21:latest
 
 WORKDIR /opt
 COPY /app .
