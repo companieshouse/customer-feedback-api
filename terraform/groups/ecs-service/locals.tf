@@ -7,7 +7,7 @@ locals {
   container_port              = "8080"
   docker_repo                 = "customer-feedback-api"
   kms_alias                   = "alias/${var.aws_profile}/environment-services-kms"
-  lb_listener_rule_priority   = 31
+  lb_listener_rule_priority   = 32
   lb_listener_paths           = ["/customer_feedback","/customer_feedback/healthcheck"]
   healthcheck_path            = "/customer_feedback/healthcheck"
   healthcheck_matcher         = "200-302"
