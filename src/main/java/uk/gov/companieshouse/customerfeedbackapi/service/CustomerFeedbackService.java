@@ -82,7 +82,7 @@ public class CustomerFeedbackService {
               + "json_data="
               + json_data.toString();
       HttpURLConnection connection = null;
-      ApiLogger.debugContext(requestId, "Calling send-email endpoint");
+      ApiLogger.debugContext(requestId, "Calling send-email endpoint: " + kafkaApiEndpoint);
       try {
         connection = (HttpURLConnection) new URL(kafkaApiEndpoint).openConnection();
         connection.setRequestMethod("POST");
