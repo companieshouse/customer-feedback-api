@@ -17,6 +17,10 @@ import uk.gov.companieshouse.customerfeedbackapi.model.dao.CustomerFeedbackDAO;
 import uk.gov.companieshouse.customerfeedbackapi.model.dto.CustomerFeedbackDTO;
 import uk.gov.companieshouse.customerfeedbackapi.repository.CustomerFeedbackRepository;
 import uk.gov.companieshouse.customerfeedbackapi.utils.ApiLogger;
+import uk.gov.companieshouse.api.chskafka.SendEmail;
+import uk.gov.companieshouse.api.InternalApiClient;
+import uk.gov.companieshouse.sdk.manager.ApiClientManager;
+import uk.gov.companieshouse.api.handler.chskafka.request.PrivateSendEmailPost;
 
 @Service
 public class CustomerFeedbackService {
@@ -60,7 +64,11 @@ public class CustomerFeedbackService {
     CustomerFeedbackDAO createdCustomerFeedback =
         customerFeedbackRepository.insert(customerFeedbackDAO);
 
+    ApiLogger.debugContext(requestId, "TRK 1");
+
+
     if (emailSent) {
+      ApiLogger.debugContext(requestId, "TRK 2");
       JSONObject json_data = new JSONObject();
       json_data.put("customer_feedback", customerFeedbackDTO.getCustomerFeedback());
       json_data.put("customer_name", customerFeedbackDTO.getCustomerName());
@@ -95,11 +103,32 @@ public class CustomerFeedbackService {
         int responseCode = connection.getResponseCode();
         ApiLogger.debugContext(requestId, "Response code from endpoint: " + responseCode);
       } catch (IOException ex) {
-        throw new SendEmailException("Error sending customer feedback email: " + ex.toString());
+        // throw new SendEmailException("Error sending customer feedback email: " + ex.toString());
+        ApiLogger.debugContext(requestId, "TRK ignore error for now: " + ex.toString());
       } finally {
         if (connection != null) {
           connection.disconnect();
         }
+      }
+      System.err.println("NSDBG kafkaApiEndpoint: "+kafkaApiEndpoint);
+      // http://chs-kafka-api:4081/send-email
+      ApiLogger.debugContext(requestId, "TRK 3");
+      SendEmail sendEmail = new SendEmail();
+      ApiLogger.debugContext(requestId, "TRK 4");
+      sendEmail.setAppId( appId );
+      sendEmail.setMessageId( UUID.randomUUID().toString() );
+      sendEmail.setMessageType( "customer-feedback" );
+      sendEmail.setJsonData( json_data.toString() );
+      ApiLogger.debugContext(requestId, "TRK 5");
+      InternalApiClient internalApiClient = ApiClientManager.getPrivateSDK();
+      ApiLogger.debugContext(requestId, "TRK 6");
+      internalApiClient.setBasePath("http://chs-kafka-api:4081");
+      ApiLogger.debugContext(requestId, "TRK 7");
+      String uri = "/send-email";
+      try {
+          PrivateSendEmailPost sendEmailPost = internalApiClient.sendEmailHandler().postSendEmail(uri,sendEmail);
+      } catch (Exception e) {
+          System.err.println("NSDBG ignoring exception: "+e.toString());
       }
     }
   }
