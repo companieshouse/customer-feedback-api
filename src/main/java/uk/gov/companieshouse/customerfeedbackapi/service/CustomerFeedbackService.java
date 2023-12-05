@@ -22,8 +22,6 @@ import uk.gov.companieshouse.api.InternalApiClient;
 import uk.gov.companieshouse.sdk.manager.ApiClientManager;
 import uk.gov.companieshouse.api.handler.chskafka.request.PrivateSendEmailPost;
 
-import uk.gov.companieshouse.session.handler.SessionHandler;
-
 @Service
 public class CustomerFeedbackService {
 
