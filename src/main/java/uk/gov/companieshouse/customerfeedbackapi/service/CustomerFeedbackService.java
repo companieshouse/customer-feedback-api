@@ -18,6 +18,9 @@ import uk.gov.companieshouse.customerfeedbackapi.model.dto.CustomerFeedbackDTO;
 import uk.gov.companieshouse.customerfeedbackapi.repository.CustomerFeedbackRepository;
 import uk.gov.companieshouse.customerfeedbackapi.utils.ApiLogger;
 
+import uk.gov.companieshouse.api.InternalApiClient;
+import uk.gov.companieshouse.sdk.manager.ApiClientManager;
+
 @Service
 public class CustomerFeedbackService {
 
@@ -102,5 +105,8 @@ public class CustomerFeedbackService {
         }
       }
     }
+    ApiLogger.debugContext(requestId, "TRK 5");
+    InternalApiClient internalApiClient = ApiClientManager.getPrivateSDK();
+    ApiLogger.debugContext(requestId, "TRK 6");
   }
 }
