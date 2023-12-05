@@ -1,9 +1,6 @@
 package uk.gov.companieshouse.customerfeedbackapi.service;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -18,8 +15,9 @@ import uk.gov.companieshouse.customerfeedbackapi.model.dto.CustomerFeedbackDTO;
 import uk.gov.companieshouse.customerfeedbackapi.repository.CustomerFeedbackRepository;
 import uk.gov.companieshouse.customerfeedbackapi.utils.ApiLogger;
 
+import uk.gov.companieshouse.customerfeedbackapi.utils.ApiClientService;
 import uk.gov.companieshouse.api.InternalApiClient;
-import uk.gov.companieshouse.sdk.manager.ApiClientManager;
+// import uk.gov.companieshouse.sdk.manager.ApiClientManager;
 
 @Service
 public class CustomerFeedbackService {
@@ -38,6 +36,9 @@ public class CustomerFeedbackService {
 
   @Value("${app-id}")
   private String appId;
+
+  @Autowired
+  private ApiClientService apiClientService;
 
   @Autowired
   public CustomerFeedbackService(
@@ -63,50 +64,9 @@ public class CustomerFeedbackService {
     CustomerFeedbackDAO createdCustomerFeedback =
         customerFeedbackRepository.insert(customerFeedbackDAO);
 
-    if (emailSent) {
-      JSONObject json_data = new JSONObject();
-      json_data.put("customer_feedback", customerFeedbackDTO.getCustomerFeedback());
-      json_data.put("customer_name", customerFeedbackDTO.getCustomerName());
-      json_data.put("customer_email", customerFeedbackDTO.getCustomerEmail());
-      json_data.put("source_url", customerFeedbackDTO.getSourceUrl());
-      json_data.put("kind", customerFeedbackDTO.getKind());
-      json_data.put("to", customerFeedbackEmail);
-      json_data.put("date", JSONObject.NULL);
-      String requestBody =
-          "app_id="
-              + appId
-              + "&"
-              + "message_id="
-              + UUID.randomUUID().toString()
-              + "&"
-              + "message_type="
-              + "customer-feedback"
-              + "&"
-              + "json_data="
-              + json_data.toString();
-      HttpURLConnection connection = null;
-      ApiLogger.debugContext(requestId, "Calling send-email endpoint: " + kafkaApiEndpoint);
-      try {
-        connection = (HttpURLConnection) new URL(kafkaApiEndpoint).openConnection();
-        connection.setRequestMethod("POST");
-        connection.setDoOutput(true);
-        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        try (DataOutputStream out = new DataOutputStream(connection.getOutputStream())) {
-          out.write(requestBody.getBytes(StandardCharsets.UTF_8));
-          out.flush();
-        }
-        int responseCode = connection.getResponseCode();
-        ApiLogger.debugContext(requestId, "Response code from endpoint: " + responseCode);
-      } catch (IOException ex) {
-        throw new SendEmailException("Error sending customer feedback email: " + ex.toString());
-      } finally {
-        if (connection != null) {
-          connection.disconnect();
-        }
-      }
-    }
     ApiLogger.debugContext(requestId, "TRK 5");
-    InternalApiClient internalApiClient = ApiClientManager.getPrivateSDK();
+    // InternalApiClient internalApiClient = ApiClientManager.getPrivateSDK();
+    InternalApiClient internalApiClient = apiClientService.getPrivateApiClient();
     ApiLogger.debugContext(requestId, "TRK 6");
   }
 }
