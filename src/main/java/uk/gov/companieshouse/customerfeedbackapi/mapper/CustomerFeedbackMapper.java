@@ -15,5 +15,8 @@ public interface CustomerFeedbackMapper {
   @Mapping(target = "data.customerName", source = "customerName")
   @Mapping(target = "data.kind", source = "kind")
   @Mapping(target = "data.sourceUrl", source = "sourceUrl")
+  @Mapping(target = "createdAt", ignore = true )
+  @Mapping(target = "emailSent", ignore = true )
+  @Mapping(target = "id", ignore = true )
   CustomerFeedbackDAO dtoToDao(CustomerFeedbackDTO customerFeedbackDTO);
 }

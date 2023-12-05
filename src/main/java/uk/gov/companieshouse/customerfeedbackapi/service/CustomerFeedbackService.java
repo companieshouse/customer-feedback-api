@@ -22,6 +22,8 @@ import uk.gov.companieshouse.api.InternalApiClient;
 import uk.gov.companieshouse.sdk.manager.ApiClientManager;
 import uk.gov.companieshouse.api.handler.chskafka.request.PrivateSendEmailPost;
 
+import uk.gov.companieshouse.session.handler.SessionHandler;
+
 @Service
 public class CustomerFeedbackService {
 
@@ -120,7 +122,12 @@ public class CustomerFeedbackService {
       sendEmail.setMessageType( "customer-feedback" );
       sendEmail.setJsonData( json_data.toString() );
       ApiLogger.debugContext(requestId, "TRK 5");
-      InternalApiClient internalApiClient = ApiClientManager.getPrivateSDK();
+      InternalApiClient internalApiClient;
+      try {
+          internalApiClient = ApiClientManager.getPrivateSDK();
+      } catch (Exception e) {
+          throw new SendEmailException("NSDBG getPrivateSDK exception: "+e.toString());
+      }
       ApiLogger.debugContext(requestId, "TRK 6");
       internalApiClient.setBasePath("http://chs-kafka-api:4081");
       ApiLogger.debugContext(requestId, "TRK 7");
