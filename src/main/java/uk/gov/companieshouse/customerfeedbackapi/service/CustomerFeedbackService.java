@@ -122,21 +122,12 @@ public class CustomerFeedbackService {
       sendEmail.setMessageType( "customer-feedback" );
       sendEmail.setJsonData( json_data.toString() );
       ApiLogger.debugContext(requestId, "TRK 5");
-      InternalApiClient internalApiClient;
-      try {
-          internalApiClient = ApiClientManager.getPrivateSDK();
-      } catch (Exception e) {
-          throw new SendEmailException("NSDBG getPrivateSDK exception: "+e.toString());
-      }
+      InternalApiClient internalApiClient = ApiClientManager.getPrivateSDK();
       ApiLogger.debugContext(requestId, "TRK 6");
       internalApiClient.setBasePath("http://chs-kafka-api:4081");
       ApiLogger.debugContext(requestId, "TRK 7");
       String uri = "/send-email";
-      try {
-          PrivateSendEmailPost sendEmailPost = internalApiClient.sendEmailHandler().postSendEmail(uri,sendEmail);
-      } catch (Exception e) {
-          System.err.println("NSDBG ignoring exception: "+e.toString());
-      }
+      PrivateSendEmailPost sendEmailPost = internalApiClient.sendEmailHandler().postSendEmail(uri,sendEmail);
     }
   }
 }
