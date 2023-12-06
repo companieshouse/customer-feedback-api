@@ -11,22 +11,23 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import uk.gov.companieshouse.api.InternalApiClient;
+import uk.gov.companieshouse.api.chskafka.SendEmail;
+import uk.gov.companieshouse.api.handler.chskafka.request.PrivateSendEmailPost;
+import uk.gov.companieshouse.customerfeedbackapi.api.ApiClientService;
 import uk.gov.companieshouse.customerfeedbackapi.exception.SendEmailException;
 import uk.gov.companieshouse.customerfeedbackapi.mapper.CustomerFeedbackMapper;
 import uk.gov.companieshouse.customerfeedbackapi.model.dao.CustomerFeedbackDAO;
 import uk.gov.companieshouse.customerfeedbackapi.model.dto.CustomerFeedbackDTO;
 import uk.gov.companieshouse.customerfeedbackapi.repository.CustomerFeedbackRepository;
 import uk.gov.companieshouse.customerfeedbackapi.utils.ApiLogger;
-import uk.gov.companieshouse.api.chskafka.SendEmail;
-import uk.gov.companieshouse.api.InternalApiClient;
-import uk.gov.companieshouse.sdk.manager.ApiClientManager;
-import uk.gov.companieshouse.api.handler.chskafka.request.PrivateSendEmailPost;
 
 @Service
 public class CustomerFeedbackService {
 
   private final CustomerFeedbackMapper customerFeedbackMapper;
   private final CustomerFeedbackRepository customerFeedbackRepository;
+  private final ApiClientService apiClientService;
 
   @Value("${send-email-flag}")
   private boolean emailSendFlag;
@@ -42,10 +43,11 @@ public class CustomerFeedbackService {
 
   @Autowired
   public CustomerFeedbackService(
-      CustomerFeedbackMapper customerFeedbackMapper,
-      CustomerFeedbackRepository customerFeedbackRepository) {
+          CustomerFeedbackMapper customerFeedbackMapper,
+          CustomerFeedbackRepository customerFeedbackRepository, ApiClientService apiClientService) {
     this.customerFeedbackMapper = customerFeedbackMapper;
     this.customerFeedbackRepository = customerFeedbackRepository;
+    this.apiClientService = apiClientService;
   }
 
   public void createCustomerFeedback(CustomerFeedbackDTO customerFeedbackDTO, String requestId)
@@ -120,7 +122,7 @@ public class CustomerFeedbackService {
       sendEmail.setMessageType( "customer-feedback" );
       sendEmail.setJsonData( json_data.toString() );
       ApiLogger.debugContext(requestId, "TRK 5");
-      InternalApiClient internalApiClient = ApiClientManager.getPrivateSDK();
+      InternalApiClient internalApiClient = apiClientService.getInternalApiClient();
       ApiLogger.debugContext(requestId, "TRK 6");
       internalApiClient.setBasePath("http://chs-kafka-api:4081");
       ApiLogger.debugContext(requestId, "TRK 7");

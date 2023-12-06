@@ -62,7 +62,7 @@ build-image:
 	@echo "Finished build-image"
 
 .PHONY: all
-all: clean build dist build-image
+all: clean build build-image
 	@echo "Running all"
 
 .PHONY: run
