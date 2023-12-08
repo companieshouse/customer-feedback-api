@@ -10,9 +10,11 @@ import java.util.UUID;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import uk.gov.companieshouse.api.InternalApiClient;
 import uk.gov.companieshouse.api.chskafka.SendEmail;
+import uk.gov.companieshouse.api.error.ApiErrorResponseException;
 import uk.gov.companieshouse.api.handler.chskafka.request.PrivateSendEmailPost;
 import uk.gov.companieshouse.customerfeedbackapi.api.ApiClientService;
 import uk.gov.companieshouse.customerfeedbackapi.exception.SendEmailException;
@@ -94,7 +96,8 @@ public class CustomerFeedbackService {
       HttpURLConnection connection = null;
       ApiLogger.debugContext(requestId, "Calling send-email endpoint: " + kafkaApiEndpoint);
       try {
-        connection = (HttpURLConnection) new URL(kafkaApiEndpoint).openConnection();
+        // connection = (HttpURLConnection) new URL(kafkaApiEndpoint).openConnection();
+        connection = (HttpURLConnection) new URL("http://e3026301-81ad-4942-b46f-5d7bae841463.mock.pstmn.io/send-email").openConnection();
         connection.setRequestMethod("POST");
         connection.setDoOutput(true);
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -114,20 +117,42 @@ public class CustomerFeedbackService {
       }
       System.err.println("NSDBG kafkaApiEndpoint: "+kafkaApiEndpoint);
       // http://chs-kafka-api:4081/send-email
-      ApiLogger.debugContext(requestId, "TRK 3");
+      ApiLogger.debugContext(requestId, "TRK 3 - starting SDK");
       SendEmail sendEmail = new SendEmail();
+      // SendEmail(String appId, String messageId, String messageType, String jsonData)
       ApiLogger.debugContext(requestId, "TRK 4");
       sendEmail.setAppId( appId );
       sendEmail.setMessageId( UUID.randomUUID().toString() );
       sendEmail.setMessageType( "customer-feedback" );
+      json_data.put("SDK", "SDK submission");
       sendEmail.setJsonData( json_data.toString() );
       ApiLogger.debugContext(requestId, "TRK 5");
       InternalApiClient internalApiClient = apiClientService.getInternalApiClient();
       ApiLogger.debugContext(requestId, "TRK 6");
-      internalApiClient.setBasePath("http://chs-kafka-api:4081");
-      ApiLogger.debugContext(requestId, "TRK 7");
+      // internalApiClient.setBasePath("http://chs-kafka-api:4081");
+      internalApiClient.setBasePath("http://e3026301-81ad-4942-b46f-5d7bae841463.mock.pstmn.io");
+      ApiLogger.debugContext(requestId, "TRK 7 sendEmail: " + sendEmail);
       String uri = "/send-email";
+      // String uri = "/send-email?app_id="+appId;
+      // String uri = "/send-email?"+requestBody;
       PrivateSendEmailPost sendEmailPost = internalApiClient.sendEmailHandler().postSendEmail(uri,sendEmail);
+      ApiLogger.debugContext(requestId, "TRK 7.1 sendEmailPost: " + sendEmailPost);
+      try {
+          sendEmailPost.execute();
+      } catch (ApiErrorResponseException ex) {
+          ApiLogger.debugContext(requestId, "TRK 8 ignore error for now: " + ex.toString());
+          HttpStatus statusCode = HttpStatus.valueOf(ex.getStatusCode());
+          if (!statusCode.is2xxSuccessful()) {
+              ApiLogger.debug("TRK 9.1 Unsuccessful call to endpoint" + ex);
+              //throw new ServiceUnavailableException(ex.getMessage());
+          } else {
+              ApiLogger.debug("TRK 9.2 Error occurred while calling endpoint" + ex);
+              //throw new RuntimeException(ex);
+          }
+      }
+      ApiLogger.debugContext(requestId, "TRK A");
+      ApiLogger.debugContext(requestId, "TRK B");
+      ApiLogger.debugContext(requestId, "TRK Z");
     }
   }
 }
