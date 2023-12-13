@@ -10,7 +10,7 @@ locals {
   lb_listener_rule_priority   = 32
   lb_listener_paths           = ["/customer-feedback","/customer-feedback/healthcheck"]
   healthcheck_path            = "/customer-feedback/healthcheck"
-  healthcheck_matcher         = "200-302"
+  healthcheck_matcher         = "200"
   vpc_name                    = local.stack_secrets["vpc_name"]
   s3_config_bucket            = data.vault_generic_secret.shared_s3.data["config_bucket_name"]
   app_environment_filename    = "customer-feedback-api.env"
