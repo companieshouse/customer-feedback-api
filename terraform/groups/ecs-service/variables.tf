@@ -118,3 +118,8 @@ variable "customer_feedback_api_version" {
   type        = string
   description = "The version of the customer-feedback-api container to run."
 }
+
+variable "eric_version" {
+  type        = string
+  description = "The version of the eric container to run."
+}
