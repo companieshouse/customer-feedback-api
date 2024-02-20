@@ -20,7 +20,8 @@
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
         <spring-boot-dependencies.version>3.2.2</spring-boot-dependencies.version>
         <spring-boot-maven-plugin.version>3.2.2</spring-boot-maven-plugin.version>
-        <structured-logging.version>2.0.3</structured-logging.version>
+        <structured-logging.version>3.0.1</structured-logging.version>
+        <jackson-databind.version>2.16.1</jackson-databind.version>
     </properties>
 
     <profiles>
@@ -143,6 +144,12 @@
             <artifactId>sonar-maven-plugin</artifactId>
             <version>${sonar-maven-plugin.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-databind.version}</version>
         </dependency>
 
     </dependencies>
