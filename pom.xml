@@ -18,6 +18,7 @@
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <org.mapstruct.version>1.5.0.RC1</org.mapstruct.version>
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
+        <sonar.java.binaries>${project.basedir}/target,${project.basedir}/target/*</sonar.java.binaries>
         <spring-boot-dependencies.version>3.2.2</spring-boot-dependencies.version>
         <spring-boot-maven-plugin.version>3.2.2</spring-boot-maven-plugin.version>
         <structured-logging.version>2.0.3</structured-logging.version>
