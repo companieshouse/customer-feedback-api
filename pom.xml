@@ -24,7 +24,7 @@
         <structured-logging.version>2.0.3</structured-logging.version>
         <jackson-databind.version>2.16.1</jackson-databind.version>
     </properties>
-
+    <!-- Temp change to test sbom changes-->
     <profiles>
         <profile>
             <id>sonar-pr-analysis</id>
