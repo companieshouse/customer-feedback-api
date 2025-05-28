@@ -1,21 +1,29 @@
 package uk.gov.companieshouse.customerfeedbackapi.unit.service;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
-import uk.gov.companieshouse.customerfeedbackapi.exception.*;
+
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import uk.gov.companieshouse.customerfeedbackapi.exception.SendEmailException;
 import uk.gov.companieshouse.customerfeedbackapi.mapper.CustomerFeedbackMapper;
 import uk.gov.companieshouse.customerfeedbackapi.model.dao.CustomerFeedbackDAO;
-import uk.gov.companieshouse.customerfeedbackapi.model.dao.CustomerFeedbackDataDAO;
 import uk.gov.companieshouse.customerfeedbackapi.model.dto.CustomerFeedbackDTO;
 import uk.gov.companieshouse.customerfeedbackapi.repository.CustomerFeedbackRepository;
 import uk.gov.companieshouse.customerfeedbackapi.service.CustomerFeedbackService;
@@ -49,16 +57,22 @@ class CustomerFeedbackServiceTest {
   @InjectMocks private CustomerFeedbackService customerFeedbackService;
 
   @Test
-  void testCreateCustomerFeedbackIsSuccessful() throws SendEmailException {
-
+  void testCreateCustomerFeedbackIsSuccessful() throws Exception {
     when(customerFeedbackMapper.dtoToDao(any())).thenReturn(customerFeedbackDAO);
     when(customerFeedbackRepository.insert(customerFeedbackDAO)).thenReturn(customerFeedbackDAO);
 
-    ReflectionTestUtils.setField(customerFeedbackService, "emailSendFlag", true);
-    ReflectionTestUtils.setField(customerFeedbackService, "kafkaApiEndpoint", "http://localhost");
-    customerFeedbackService.createCustomerFeedback(customerFeedbackDTO, REQUEST_ID);
+    try (MockWebServer server = new MockWebServer()) {
+      server.enqueue(new MockResponse().setResponseCode(200));
+      server.start();
 
-    verify(customerFeedbackMapper, times(1)).dtoToDao(any());
+      String endpoint = server.url("/").toString();
+      ReflectionTestUtils.setField(customerFeedbackService, "emailSendFlag", true);
+      ReflectionTestUtils.setField(customerFeedbackService, "kafkaApiEndpoint", endpoint);
+
+      customerFeedbackService.createCustomerFeedback(customerFeedbackDTO, REQUEST_ID);
+
+      verify(customerFeedbackMapper, times(1)).dtoToDao(any());
+    }
   }
 
   @Test
