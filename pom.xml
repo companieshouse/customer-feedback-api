@@ -5,7 +5,7 @@
     <parent>
         <groupId>uk.gov.companieshouse</groupId>
         <artifactId>companies-house-parent</artifactId>
-        <version>2.1.5</version>
+        <version>2.1.11</version>
     </parent>
     <groupId>uk.gov.companieshouse</groupId>
     <artifactId>customer-feedback-api</artifactId>
@@ -19,10 +19,16 @@
         <org.mapstruct.version>1.5.0.RC1</org.mapstruct.version>
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
         <sonar.java.binaries>${project.basedir}/target,${project.basedir}/target/*</sonar.java.binaries>
-        <spring-boot-dependencies.version>3.2.4</spring-boot-dependencies.version>
-        <spring-boot-maven-plugin.version>3.2.4</spring-boot-maven-plugin.version>
+        <sonar.token>${CODE_ANALYSIS_TOKEN}</sonar.token>
+        <sonar.login></sonar.login>
+        <sonar.password></sonar.password>
+        <sonar.projectName>customer-feedback-api</sonar.projectName>
+        <sonar.projectKey>uk.gov.companieshouse:customer-feedback-api</sonar.projectKey>
+        <spring-boot-starter.version>3.4.5</spring-boot-starter.version>
+        <spring-context.version>6.2.7</spring-context.version>
         <structured-logging.version>2.0.3</structured-logging.version>
         <jackson-databind.version>2.16.1</jackson-databind.version>
+        <mockwebserver.version>4.9.3</mockwebserver.version>
     </properties>
 
     <profiles>
@@ -46,9 +52,14 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot-dependencies.version}</version>
+                <version>${spring-boot-starter.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring-context.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -153,6 +164,12 @@
             <version>${jackson-databind.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>mockwebserver</artifactId>
+            <version>${mockwebserver.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -160,7 +177,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot-maven-plugin.version}</version>
+                <version>${spring-boot-starter.version}</version>
                 <configuration>
                     <mainClass>uk.gov.companieshouse.customerfeedbackapi.CustomerFeedbackApiApplication</mainClass>
                 </configuration>
