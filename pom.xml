@@ -14,11 +14,11 @@
     <description>Customer feedback API</description>
     <properties>
         <java.version>21</java.version>
-        <log4j.version>2.17.2</log4j.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <log4j.version>2.20.0</log4j.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <org.mapstruct.version>1.5.0.RC1</org.mapstruct.version>
         <tomcat-embed-core.version>11.0.7</tomcat-embed-core.version>
-        <spring-web.version>6.2.8</spring-web.version>
+        <spring-web.version>6.2.10</spring-web.version>
         <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
         <sonar.java.binaries>${project.basedir}/target,${project.basedir}/target/*</sonar.java.binaries>
         <sonar.token>${CODE_ANALYSIS_TOKEN}</sonar.token>
@@ -27,10 +27,10 @@
         <sonar.projectName>customer-feedback-api</sonar.projectName>
         <sonar.projectKey>uk.gov.companieshouse:customer-feedback-api</sonar.projectKey>
         <spring-boot-starter.version>3.4.5</spring-boot-starter.version>
-        <spring-context.version>6.2.7</spring-context.version>
-        <structured-logging.version>2.0.3</structured-logging.version>
+        <spring-context.version>6.2.10</spring-context.version>
+        <structured-logging.version>3.0.40</structured-logging.version>
         <jackson-databind.version>2.16.1</jackson-databind.version>
-        <mockwebserver.version>4.9.3</mockwebserver.version>
+        <mockwebserver.version>5.0.0-alpha.14</mockwebserver.version>
     </properties>
 
     <profiles>
@@ -147,7 +147,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
+            <version>3.18.0</version>
         </dependency>
 
         <dependency>
