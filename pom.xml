@@ -31,6 +31,11 @@
         <structured-logging.version>3.0.40</structured-logging.version>
         <jackson-databind.version>2.16.1</jackson-databind.version>
         <mockwebserver.version>5.0.0-alpha.14</mockwebserver.version>
+        <commons-lang3.version>3.18.0</commons-lang3.version>
+        <mockito-inline.version>5.2.0</mockito-inline.version>
+        <validation-api.version>2.0.1.Final</validation-api.version>
+        <json.version>20231013</json.version>
+        <encoder.version>1.2.3</encoder.version>
     </properties>
 
     <profiles>
@@ -123,13 +128,13 @@
         <dependency>
             <groupId>org.owasp.encoder</groupId>
             <artifactId>encoder</artifactId>
-            <version>1.2.3</version>
+            <version>${encoder.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20231013</version>
+            <version>${json.version}</version>
         </dependency>
 
         <dependency>
@@ -147,20 +152,20 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-            <version>3.18.0</version>
+            <version>${commons-lang3.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-inline</artifactId>
-            <version>5.2.0</version>
+            <version>${mockito-inline.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
+            <version>${validation-api.version}</version>
         </dependency>
 
         <dependency>
