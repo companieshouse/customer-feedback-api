@@ -27,7 +27,7 @@ public class CustomerFeedbackController {
 
   @PostMapping("/customer-feedback")
   @SuppressWarnings({ "unchecked", "rawtypes" })
-  public ResponseEntity<String> feedback(
+  public ResponseEntity<CustomerFeedbackDTO> feedback(
       @Valid @RequestBody CustomerFeedbackDTO customerFeedbackDTO,
       @RequestHeader(value = ERIC_REQUEST_ID_KEY) String requestId)
       throws SendEmailException {

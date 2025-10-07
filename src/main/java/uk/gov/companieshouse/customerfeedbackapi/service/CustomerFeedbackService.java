@@ -62,14 +62,14 @@ public class CustomerFeedbackService {
     customerFeedbackRepository.insert(customerFeedbackDAO);
 
     if (emailSent) {
-      JSONObject json_data = new JSONObject();
-      json_data.put("customer_feedback", customerFeedbackDTO.getCustomerFeedback());
-      json_data.put("customer_name", customerFeedbackDTO.getCustomerName());
-      json_data.put("customer_email", customerFeedbackDTO.getCustomerEmail());
-      json_data.put("source_url", customerFeedbackDTO.getSourceUrl());
-      json_data.put("kind", customerFeedbackDTO.getKind());
-      json_data.put("to", customerFeedbackEmail);
-      json_data.put("date", JSONObject.NULL);
+      JSONObject jsonData = new JSONObject();
+      jsonData.put("customer_feedback", customerFeedbackDTO.getCustomerFeedback());
+      jsonData.put("customer_name", customerFeedbackDTO.getCustomerName());
+      jsonData.put("customer_email", customerFeedbackDTO.getCustomerEmail());
+      jsonData.put("source_url", customerFeedbackDTO.getSourceUrl());
+      jsonData.put("kind", customerFeedbackDTO.getKind());
+      jsonData.put("to", customerFeedbackEmail);
+      jsonData.put("date", JSONObject.NULL);
       String requestBody =
           "app_id="
               + appId
@@ -81,7 +81,7 @@ public class CustomerFeedbackService {
               + "customer-feedback"
               + "&"
               + "json_data="
-              + json_data.toString();
+              + jsonData.toString();
       HttpURLConnection connection = null;
       ApiLogger.debugContext(requestId, "Calling send-email endpoint: " + kafkaApiEndpoint);
       try {

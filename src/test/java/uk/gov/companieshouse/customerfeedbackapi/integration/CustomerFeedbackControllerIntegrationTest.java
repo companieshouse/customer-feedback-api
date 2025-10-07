@@ -32,18 +32,18 @@ class CustomerFeedbackControllerIntegrationTest {
 
   @Test
   void testCreateCustomerFeedbackSuccessTest() throws Exception {
-    String EMAIL = "Test@Test.com";
-    String FEEDBACK = "Something went wrong";
-    String NAME = "A User";
-    String KIND = "feedback";
-    String SOURCE_URL = "http://chs.local";
-    LocalDateTime CREATED_AT = LocalDateTime.now();
-    boolean SENT_EMAIL = true;
+    String email = "Test@Test.com";
+    String feedback = "Something went wrong";
+    String name = "A User";
+    String kind = "feedback";
+    String sourceUrl = "http://chs.local";
+    LocalDateTime createdAt = LocalDateTime.now();
+    boolean sentEmail = true;
     CustomerFeedbackDTO customerFeedbackDTO =
-        helper.generateCustomerFeedbackDTO(EMAIL, FEEDBACK, NAME, KIND, SOURCE_URL);
+        helper.generateCustomerFeedbackDTO(email, feedback, name, kind, sourceUrl);
     CustomerFeedbackDAO customerFeedbackDAO =
         helper.generateCustomerFeedbackDAO(
-            EMAIL, FEEDBACK, NAME, KIND, SOURCE_URL, CREATED_AT, SENT_EMAIL);
+            email, feedback, name, kind, sourceUrl, createdAt, sentEmail);
 
     when(customerFeedbackRepository.insert(any(CustomerFeedbackDAO.class)))
         .thenReturn(customerFeedbackDAO);
@@ -55,27 +55,27 @@ class CustomerFeedbackControllerIntegrationTest {
                 .header("X-Request-Id", "123456")
                 .content(helper.writeToJson(customerFeedbackDTO)))
         .andExpect(status().isCreated())
-        .andExpect(jsonPath("$.customer_email").value(EMAIL))
-        .andExpect(jsonPath("$.customer_feedback").value(FEEDBACK))
-        .andExpect(jsonPath("$.customer_name").value(NAME))
-        .andExpect(jsonPath("$.kind").value(KIND))
-        .andExpect(jsonPath("$.source_url").value(SOURCE_URL));
+        .andExpect(jsonPath("$.customer_email").value(email))
+        .andExpect(jsonPath("$.customer_feedback").value(feedback))
+        .andExpect(jsonPath("$.customer_name").value(name))
+        .andExpect(jsonPath("$.kind").value(kind))
+        .andExpect(jsonPath("$.source_url").value(sourceUrl));
   }
 
   @Test
   void testCreateCustomerFeedbackEmptyFeedbackFailureTest() throws Exception {
-    String EMAIL = "test@test.com";
-    String FEEDBACK = "";
-    String NAME = "A User";
-    String KIND = "feedback";
-    String SOURCE_URL = "http://chs.local";
-    LocalDateTime CREATED_AT = LocalDateTime.now();
-    boolean SENT_EMAIL = true;
+    String email = "test@test.com";
+    String feedback = "";
+    String name = "A User";
+    String kind = "feedback";
+    String sourceUrl = "http://chs.local";
+    LocalDateTime createdAt = LocalDateTime.now();
+    boolean sentEmail = true;
     CustomerFeedbackDTO customerFeedbackDTO =
-        helper.generateCustomerFeedbackDTO(EMAIL, FEEDBACK, NAME, KIND, SOURCE_URL);
+        helper.generateCustomerFeedbackDTO(email, feedback, name, kind, sourceUrl);
     CustomerFeedbackDAO customerFeedbackDAO =
         helper.generateCustomerFeedbackDAO(
-            EMAIL, FEEDBACK, NAME, KIND, SOURCE_URL, CREATED_AT, SENT_EMAIL);
+            email, feedback, name, kind, sourceUrl, createdAt, sentEmail);
 
     when(customerFeedbackRepository.insert(any(CustomerFeedbackDAO.class)))
         .thenReturn(customerFeedbackDAO);
@@ -92,19 +92,19 @@ class CustomerFeedbackControllerIntegrationTest {
 
   @Test
   void testCreateCustomerFeedbackEmailLengthFailureTest() throws Exception {
-    String EMAIL =
+    String email =
         "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890@test.com";
-    String FEEDBACK = "Something went wrong";
-    String NAME = "A User";
-    String KIND = "feedback";
-    String SOURCE_URL = "http://chs.local";
-    LocalDateTime CREATED_AT = LocalDateTime.now();
-    boolean SENT_EMAIL = true;
+    String feedback = "Something went wrong";
+    String name = "A User";
+    String kind = "feedback";
+    String sourceUrl = "http://chs.local";
+    LocalDateTime createdAt = LocalDateTime.now();
+    boolean sentEmail = true;
     CustomerFeedbackDTO customerFeedbackDTO =
-        helper.generateCustomerFeedbackDTO(EMAIL, FEEDBACK, NAME, KIND, SOURCE_URL);
+        helper.generateCustomerFeedbackDTO(email, feedback, name, kind, sourceUrl);
     CustomerFeedbackDAO customerFeedbackDAO =
         helper.generateCustomerFeedbackDAO(
-            EMAIL, FEEDBACK, NAME, KIND, SOURCE_URL, CREATED_AT, SENT_EMAIL);
+            email, feedback, name, kind, sourceUrl, createdAt, sentEmail);
 
     when(customerFeedbackRepository.insert(any(CustomerFeedbackDAO.class)))
         .thenReturn(customerFeedbackDAO);
@@ -121,18 +121,18 @@ class CustomerFeedbackControllerIntegrationTest {
 
   @Test
   void testCreateCustomerFeedbackWrongKindFailureTest() throws Exception {
-    String EMAIL = "test@test.com";
-    String FEEDBACK = "The wrong kind of kind";
-    String NAME = "A User";
-    String KIND = "duckfeed";
-    String SOURCE_URL = "http://chs.local";
-    LocalDateTime CREATED_AT = LocalDateTime.now();
-    boolean SENT_EMAIL = true;
+    String email = "test@test.com";
+    String feedback = "The wrong kind of kind";
+    String name = "A User";
+    String kind = "duckfeed";
+    String sourceUrl = "http://chs.local";
+    LocalDateTime createdAt = LocalDateTime.now();
+    boolean sentEmail = true;
     CustomerFeedbackDTO customerFeedbackDTO =
-        helper.generateCustomerFeedbackDTO(EMAIL, FEEDBACK, NAME, KIND, SOURCE_URL);
+        helper.generateCustomerFeedbackDTO(email, feedback, name, kind, sourceUrl);
     CustomerFeedbackDAO customerFeedbackDAO =
         helper.generateCustomerFeedbackDAO(
-            EMAIL, FEEDBACK, NAME, KIND, SOURCE_URL, CREATED_AT, SENT_EMAIL);
+            email, feedback, name, kind, sourceUrl, createdAt, sentEmail);
 
     when(customerFeedbackRepository.insert(any(CustomerFeedbackDAO.class)))
         .thenReturn(customerFeedbackDAO);

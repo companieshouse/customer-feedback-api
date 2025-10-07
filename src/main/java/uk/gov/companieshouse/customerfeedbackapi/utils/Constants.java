@@ -1,6 +1,5 @@
 package uk.gov.companieshouse.customerfeedbackapi.utils;
 
-// TODO Review this file
 public class Constants {
 
   private Constants() {}
