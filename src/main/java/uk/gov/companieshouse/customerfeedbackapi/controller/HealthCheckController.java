@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HealthCheckController {
 
   @GetMapping("/customer-feedback/healthcheck")
+  @SuppressWarnings({ "unchecked", "rawtypes" })
   public ResponseEntity<String> healthcheck() {
     return new ResponseEntity("Customer Feedback API Service is healthy", HttpStatus.OK);
   }

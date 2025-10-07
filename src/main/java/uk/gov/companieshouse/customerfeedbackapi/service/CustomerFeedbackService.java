@@ -3,17 +3,19 @@ package uk.gov.companieshouse.customerfeedbackapi.service;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.UUID;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
 import uk.gov.companieshouse.customerfeedbackapi.exception.SendEmailException;
 import uk.gov.companieshouse.customerfeedbackapi.mapper.CustomerFeedbackMapper;
-import uk.gov.companieshouse.customerfeedbackapi.model.dao.CustomerFeedbackDAO;
 import uk.gov.companieshouse.customerfeedbackapi.model.dto.CustomerFeedbackDTO;
 import uk.gov.companieshouse.customerfeedbackapi.repository.CustomerFeedbackRepository;
 import uk.gov.companieshouse.customerfeedbackapi.utils.ApiLogger;
@@ -57,8 +59,7 @@ public class CustomerFeedbackService {
     customerFeedbackDAO.setEmailSent(emailSent);
 
     ApiLogger.debugContext(requestId, "Inserting customer feedback record");
-    CustomerFeedbackDAO createdCustomerFeedback =
-        customerFeedbackRepository.insert(customerFeedbackDAO);
+    customerFeedbackRepository.insert(customerFeedbackDAO);
 
     if (emailSent) {
       JSONObject json_data = new JSONObject();
@@ -84,7 +85,7 @@ public class CustomerFeedbackService {
       HttpURLConnection connection = null;
       ApiLogger.debugContext(requestId, "Calling send-email endpoint: " + kafkaApiEndpoint);
       try {
-        connection = (HttpURLConnection) new URL(kafkaApiEndpoint).openConnection();
+        connection = (HttpURLConnection) new URI(kafkaApiEndpoint).toURL().openConnection();
         connection.setRequestMethod("POST");
         connection.setDoOutput(true);
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -94,7 +95,7 @@ public class CustomerFeedbackService {
         }
         int responseCode = connection.getResponseCode();
         ApiLogger.debugContext(requestId, "Response code from endpoint: " + responseCode);
-      } catch (IOException ex) {
+      } catch (IOException | URISyntaxException | IllegalArgumentException ex) {
         throw new SendEmailException("Error sending customer feedback email: " + ex.toString());
       } finally {
         if (connection != null) {
