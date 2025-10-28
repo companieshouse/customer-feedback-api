@@ -17,7 +17,7 @@
         <log4j.version>2.20.0</log4j.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <org.mapstruct.version>1.5.0.RC1</org.mapstruct.version>
-        <tomcat-embed-core.version>11.0.10</tomcat-embed-core.version>
+        <tomcat-embed-core.version>11.0.12</tomcat-embed-core.version>
         <spring-web.version>6.2.10</spring-web.version>
         <sonar-maven-plugin.version>4.0.0.4121</sonar-maven-plugin.version>
         <sonar.java.binaries>${project.basedir}/target,${project.basedir}/target/*</sonar.java.binaries>
