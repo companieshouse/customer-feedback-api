@@ -8,7 +8,6 @@ In order to build this service locally you need:
 - [Java](http://www.oracle.com/technetwork/java/javase/downloads)
 - [Maven](https://maven.apache.org/download.cgi)
 - [Docker](https://www.docker.com/)
-- [Tilt](https://tilt.dev/)
 - [Git](https://git-scm.com/downloads)
 - [MongoDB](https://www.mongodb.com)
 
@@ -46,8 +45,7 @@ The following are environment variables necessary to run the API:
 1. Clone [Docker CHS Development](https://github.com/companieshouse/docker-chs-development) and follow the steps in the README.
 2. `cd` into `docker-chs-development`, and run `./bin/chs-dev modules enable customer-feedback-api`
 3. Run `./bin/chs-dev development enable customer-feedback-api`
-4. Run docker using `tilt up` in the `docker-chs-development` directory.
-5. Use spacebar in the command line to open tilt window - wait for `customer-feedback-api` to become green.
+4. Run docker using `chs-dev up` in the `docker-chs-development` directory.
 
 
 
@@ -112,7 +110,7 @@ and should look like the following
 }
 ```
 
-In Tilt the customer-feedback-api logging shows the progress of the request
+In docker-chs-development the customer-feedback-api logging shows the progress of the request
 
 ```
 {"created":"2023-11-10T14:23:13.346Z","event":"info","namespace":"customer-feedback-api","context":"lV-0jcSzm5KOGiCyExS5Blo0xpW1","data":{"message":"Customer feedback submitted"}}
