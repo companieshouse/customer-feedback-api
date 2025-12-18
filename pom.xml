@@ -22,16 +22,18 @@
         <sonar-maven-plugin.version>4.0.0.4121</sonar-maven-plugin.version>
         <sonar.java.binaries>${project.basedir}/target,${project.basedir}/target/*</sonar.java.binaries>
         <sonar.token>${CODE_ANALYSIS_TOKEN}</sonar.token>
+
         <sonar.login></sonar.login>
         <sonar.password></sonar.password>
         <sonar.projectName>customer-feedback-api</sonar.projectName>
         <sonar.projectKey>uk.gov.companieshouse:customer-feedback-api</sonar.projectKey>
-
-        <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
-        <sonar.coverage.jacoco.xmlReportPaths>
-            ${project.basedir}/target/site/jacoco/jacoco.xml
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco/jacoco.xml,
+            ${project.basedir}/target/site/jacoco-it/jacoco.xml
         </sonar.coverage.jacoco.xmlReportPaths>
         <sonar.jacoco.reports>${project.basedir}/target/site</sonar.jacoco.reports>
+        <sonar.dependencyCheck.htmlReportPath>
+            ${project.basedir}/target/dependency-check-report.html
+        </sonar.dependencyCheck.htmlReportPath>
 
         <spring-boot-starter.version>3.5.3</spring-boot-starter.version>
         <spring-context.version>6.2.10</spring-context.version>
