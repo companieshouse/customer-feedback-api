@@ -7,7 +7,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -76,7 +75,7 @@ class CustomerFeedbackServiceTest {
   }
 
   @Test
-  void testCreateCustomerFeedbackFailsSendEmailException() throws SendEmailException, IOException {
+  void testCreateCustomerFeedbackFailsSendEmailException() throws SendEmailException {
     when(customerFeedbackMapper.dtoToDao(any())).thenReturn(customerFeedbackDAO);
     when(customerFeedbackRepository.insert(customerFeedbackDAO)).thenReturn(customerFeedbackDAO);
 

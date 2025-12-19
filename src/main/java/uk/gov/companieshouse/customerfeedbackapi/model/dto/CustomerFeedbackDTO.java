@@ -26,7 +26,7 @@ public class CustomerFeedbackDTO {
   private String sourceUrl;
 
   public String getCustomerEmail() {
-    return customerEmail != null && customerEmail.length() > 0 ? customerEmail : "(not provided)";
+    return ((customerEmail != null) && !customerEmail.isEmpty()) ? customerEmail : "(not provided)";
   }
 
   public void setCustomerEmail(String customerEmail) {
@@ -42,7 +42,7 @@ public class CustomerFeedbackDTO {
   }
 
   public String getCustomerName() {
-    return customerName != null && customerName.length() > 0 ? customerName : "(not provided)";
+    return ((customerName != null) && !customerName.isEmpty()) ? customerName : "(not provided)";
   }
 
   public void setCustomerName(String customerName) {
@@ -50,7 +50,7 @@ public class CustomerFeedbackDTO {
   }
 
   public String getKind() {
-    return kind != null && kind.length() > 0 ? kind : "feedback";
+    return ((kind != null) && !kind.isEmpty()) ? kind : "feedback";
   }
 
   public void setKind(String kind) {

@@ -46,7 +46,7 @@ class CustomerFeedbackControllerTest {
 
     var feedbackResponse = customerFeedbackController.feedback(customerFeedbackDTO, REQUEST_ID);
 
-    assertEquals(HttpStatus.CREATED.value(), feedbackResponse.getStatusCodeValue());
+    assertEquals(HttpStatus.CREATED.value(), feedbackResponse.getStatusCode().value());
     assertEquals(customerFeedbackDTO, feedbackResponse.getBody());
 
     verify(customerFeedbackService).createCustomerFeedback(customerFeedbackDTO, REQUEST_ID);
