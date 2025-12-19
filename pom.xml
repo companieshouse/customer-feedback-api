@@ -17,9 +17,9 @@
         <log4j.version>2.20.0</log4j.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <org.mapstruct.version>1.5.0.RC1</org.mapstruct.version>
-        <tomcat-embed-core.version>11.0.10</tomcat-embed-core.version>
+        <tomcat-embed-core.version>11.0.15</tomcat-embed-core.version>
         <spring-web.version>6.2.10</spring-web.version>
-        <sonar-maven-plugin.version>4.0.0.4121</sonar-maven-plugin.version>
+        <sonar-maven-plugin.version>5.5.0.6356</sonar-maven-plugin.version>
         <sonar.java.binaries>${project.basedir}/target,${project.basedir}/target/*</sonar.java.binaries>
         <sonar.token>${CODE_ANALYSIS_TOKEN}</sonar.token>
 
@@ -35,7 +35,7 @@
             ${project.basedir}/target/dependency-check-report.html
         </sonar.dependencyCheck.htmlReportPath>
 
-        <spring-boot-starter.version>3.5.3</spring-boot-starter.version>
+        <spring-boot-starter.version>3.5.7</spring-boot-starter.version>
         <spring-context.version>6.2.10</spring-context.version>
         <structured-logging.version>3.0.40</structured-logging.version>
         <jackson-databind.version>2.16.1</jackson-databind.version>
