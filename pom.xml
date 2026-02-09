@@ -42,7 +42,7 @@
             ${project.basedir}/target/dependency-check-report.html
         </sonar.dependencyCheck.htmlReportPath>
 
-        <spring-boot-starter.version>3.5.7</spring-boot-starter.version>
+        <spring-boot-starter.version>3.5.9</spring-boot-starter.version>
         <spring-context.version>6.2.10</spring-context.version>
         <structured-logging.version>3.0.40</structured-logging.version>
         <jackson-databind.version>2.16.1</jackson-databind.version>
@@ -53,6 +53,7 @@
         <json.version>20231013</json.version>
         <encoder.version>1.2.3</encoder.version>
         <assertj-core.version>3.27.7</assertj-core.version>
+        <logback.version>1.5.26</logback.version>
     </properties>
 
     <profiles>
@@ -135,6 +136,20 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>${logback.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
                 <scope>compile</scope>
             </dependency>
         </dependencies>
