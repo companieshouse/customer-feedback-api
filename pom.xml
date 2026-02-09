@@ -14,7 +14,7 @@
     <description>Customer feedback API</description>
     <properties>
         <java.version>21</java.version>
-        <log4j.version>2.20.0</log4j.version>
+        <log4j.version>2.25.3</log4j.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
         <org.mapstruct.version>1.5.0.RC1</org.mapstruct.version>
