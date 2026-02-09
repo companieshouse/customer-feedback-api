@@ -52,6 +52,7 @@
         <validation-api.version>2.0.1.Final</validation-api.version>
         <json.version>20231013</json.version>
         <encoder.version>1.2.3</encoder.version>
+        <assertj-core.version>3.27.7</assertj-core.version>
     </properties>
 
     <profiles>
@@ -121,6 +122,13 @@
                         <artifactId>commons-lang</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj-core.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
