@@ -53,7 +53,7 @@
         <json.version>20231013</json.version>
         <encoder.version>1.2.3</encoder.version>
         <assertj-core.version>3.27.7</assertj-core.version>
-        <logback.version>1.5.26</logback.version>
+        <logback.version>1.5.28</logback.version>
     </properties>
 
     <profiles>
