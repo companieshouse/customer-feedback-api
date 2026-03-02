@@ -33,6 +33,7 @@
         <structured-logging.version>3.0.40</structured-logging.version>
         <logback-version>1.5.28</logback-version>
         <tomcat-embed-core.version>11.0.18</tomcat-embed-core.version>
+        <assertj-core.version>3.27.7</assertj-core.version>
 
         <sonar.java.binaries>${project.basedir}/target,${project.basedir}/target/*</sonar.java.binaries>
         <sonar.token>${CODE_ANALYSIS_TOKEN}</sonar.token>
@@ -107,6 +108,12 @@
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
                 <version>${jackson-core.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj-core.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
