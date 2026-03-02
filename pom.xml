@@ -131,7 +131,6 @@
                 <version>${commons-lang3.version}</version>
                 <scope>compile</scope>
             </dependency>
-            <!-- Removed redundant version management for spring-context, spring-web, logback, validation-api, jackson-databind -->
         </dependencies>
     </dependencyManagement>
 
