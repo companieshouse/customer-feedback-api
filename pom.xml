@@ -31,6 +31,8 @@
         <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
         <spring-boot-starter.version>3.5.9</spring-boot-starter.version>
         <structured-logging.version>3.0.40</structured-logging.version>
+        <tomcat-embed-core.version>11.0.18</tomcat-embed-core.version>
+
         <sonar.java.binaries>${project.basedir}/target,${project.basedir}/target/*</sonar.java.binaries>
         <sonar.token>${CODE_ANALYSIS_TOKEN}</sonar.token>
 
@@ -82,6 +84,11 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-core</artifactId>
+                <version>${tomcat-embed-core.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
