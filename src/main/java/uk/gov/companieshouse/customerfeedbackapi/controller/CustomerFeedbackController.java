@@ -2,7 +2,7 @@ package uk.gov.companieshouse.customerfeedbackapi.controller;
 
 import static uk.gov.companieshouse.customerfeedbackapi.utils.Constants.ERIC_REQUEST_ID_KEY;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
