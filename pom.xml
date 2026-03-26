@@ -284,6 +284,7 @@
              </exclusions>
         </dependency>
 
+        <!-- TODO: Migrate to Jackson 3 when structured-logging and related libs are upgraded. -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
