@@ -42,7 +42,7 @@
             ${project.basedir}/target/dependency-check-report.html
         </sonar.dependencyCheck.htmlReportPath>
 
-        <spring-boot-starter.version>3.5.12</spring-boot-starter.version>
+        <spring-boot-starter.version>4.0.4</spring-boot-starter.version>
         <spring-context.version>6.2.10</spring-context.version>
         <structured-logging.version>3.0.40</structured-logging.version>
         <jackson-databind.version>2.16.1</jackson-databind.version>
