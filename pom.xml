@@ -53,6 +53,7 @@
         <assertj-core.version>3.27.7</assertj-core.version>
         <logback.version>1.5.28</logback.version>
         <jackson-core.version>2.21.2</jackson-core.version>
+        <testcontainers-bom.version>1.21.4</testcontainers-bom.version>
     </properties>
 
     <profiles>
@@ -147,11 +148,10 @@
                 <artifactId>jackson-core</artifactId>
                 <version>${jackson-core.version}</version>
             </dependency>
-            <!-- dependencyManagement -->
             <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers-bom</artifactId>
-                <version>1.20.4</version>
+                <version>${testcontainers-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
