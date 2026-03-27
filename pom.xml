@@ -51,6 +51,7 @@
         <assertj-core.version>3.27.7</assertj-core.version>
         <logback.version>1.5.28</logback.version>
         <testcontainers-bom.version>1.21.4</testcontainers-bom.version>
+        <maven-failsafe-plugin.version>3.5.4</maven-failsafe-plugin.version>
     </properties>
 
     <profiles>
@@ -367,6 +368,29 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                    <argLine>${failsafeArgLine}</argLine>
+                    <classesDirectory>${project.build.outputDirectory}</classesDirectory>
+                    <skipITs>${skip.integration.tests}</skipITs>
+                    <includes>
+                        <include>**/*IntegrationTest.java</include>
+                    </includes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
