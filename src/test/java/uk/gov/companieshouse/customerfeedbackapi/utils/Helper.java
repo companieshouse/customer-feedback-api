@@ -1,9 +1,8 @@
 package uk.gov.companieshouse.customerfeedbackapi.utils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.ObjectWriter;
+import tools.jackson.databind.SerializationFeature;
 import java.time.LocalDateTime;
 import uk.gov.companieshouse.customerfeedbackapi.model.dao.CustomerFeedbackDAO;
 import uk.gov.companieshouse.customerfeedbackapi.model.dao.CustomerFeedbackDataDAO;
@@ -49,10 +48,8 @@ public class Helper {
     return customerFeedbackDAO;
   }
 
-  public String writeToJson(Object object) throws JsonProcessingException {
-    ObjectMapper mapper = new ObjectMapper();
-    mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-    ObjectWriter ow = mapper.writer();
-    return ow.writeValueAsString(object);
+  public String writeToJson(Object object) {
+    ObjectWriter ow = new ObjectMapper().writer();
+    return ow.without(SerializationFeature.WRAP_ROOT_VALUE).writeValueAsString(object);
   }
 }

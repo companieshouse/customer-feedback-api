@@ -43,7 +43,6 @@
 
         <spring-boot-starter.version>4.0.4</spring-boot-starter.version>
         <structured-logging.version>3.0.40</structured-logging.version>
-        <jackson-databind.version>2.16.1</jackson-databind.version>
         <mockwebserver.version>5.0.0-alpha.14</mockwebserver.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
         <mockito-inline.version>5.2.0</mockito-inline.version>
@@ -250,12 +249,6 @@
                     <artifactId>commons-lang</artifactId>
                 </exclusion>
              </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson-databind.version}</version>
         </dependency>
 
         <dependency>
