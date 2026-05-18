@@ -18,7 +18,7 @@
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
         <org.mapstruct.version>1.5.0.RC1</org.mapstruct.version>
-        <tomcat-embed-core.version>11.0.21</tomcat-embed-core.version>
+        <tomcat-embed-core.version>11.0.22</tomcat-embed-core.version>
         <spring-web.version>6.2.18</spring-web.version>
         <sonar-maven-plugin.version>5.5.0.6356</sonar-maven-plugin.version>
         <sonar.java.binaries>${project.basedir}/target,${project.basedir}/target/*</sonar.java.binaries>
