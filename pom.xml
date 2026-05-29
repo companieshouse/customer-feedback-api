@@ -236,8 +236,6 @@
             <version>${json.version}</version>
         </dependency>
 
-        <!-- TODO Jackson 2 (com.fasterxml) retained transitively via structured-logging only. Migrate fully to Jackson 3 when structured-logging
-        drops Jackson 2 dependency. -->
         <dependency>
             <groupId>uk.gov.companieshouse</groupId>
             <artifactId>structured-logging</artifactId>
