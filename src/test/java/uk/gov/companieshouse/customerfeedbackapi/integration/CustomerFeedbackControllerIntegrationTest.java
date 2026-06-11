@@ -27,7 +27,7 @@ class CustomerFeedbackControllerIntegrationTest {
 
     @Container
     @ServiceConnection
-    static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:6");
+    static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:8");
 
     @Autowired
     private MockMvc mvc;
