@@ -6,23 +6,21 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.test.web.servlet.MockMvc;
+
 import uk.gov.companieshouse.customerfeedbackapi.controller.HealthCheckController;
 
-@SpringBootTest
-@ContextConfiguration(classes = HealthCheckController.class)
-@AutoConfigureMockMvc
+@WebMvcTest(HealthCheckController.class)
 class HealthCheckControllerTest {
-  @Autowired private MockMvc mvc;
+    @Autowired
+    private MockMvc mvc;
 
-  @Test
-  void HealthCheckEndpointTest() throws Exception {
-    this.mvc
-        .perform(get("/customer-feedback/healthcheck"))
-        .andExpect(status().isOk())
-        .andExpect(content().string("Customer Feedback API Service is healthy"));
-  }
+    @Test
+    void HealthCheckEndpointTest() throws Exception {
+        this.mvc
+                .perform(get("/customer-feedback/healthcheck"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Customer Feedback API Service is healthy"));
+    }
 }
