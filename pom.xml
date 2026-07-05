@@ -51,7 +51,7 @@
         <json.version>20231013</json.version>
         <encoder.version>1.2.3</encoder.version>
         <assertj-core.version>3.27.7</assertj-core.version>
-        <logback.version>1.5.28</logback.version>
+        <logback.version>1.5.33</logback.version>
         <testcontainers-bom.version>1.21.4</testcontainers-bom.version>
         <maven-failsafe-plugin.version>3.5.4</maven-failsafe-plugin.version>
     </properties>
