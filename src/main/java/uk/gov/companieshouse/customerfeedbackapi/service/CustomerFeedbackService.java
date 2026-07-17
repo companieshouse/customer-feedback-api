@@ -55,7 +55,9 @@ public class CustomerFeedbackService {
 
     customerFeedbackDAO.setCreatedAt(LocalDateTime.now());
 
-    boolean emailSent = emailSendFlag && !customerFeedbackDAO.getData().getSourceUrl().isBlank();
+    String sourceUrl = customerFeedbackDAO.getData().getSourceUrl();
+
+    boolean emailSent = emailSendFlag && sourceUrl != null && !sourceUrl.isBlank();
     customerFeedbackDAO.setEmailSent(emailSent);
 
     ApiLogger.debugContext(requestId, "Inserting customer feedback record");
