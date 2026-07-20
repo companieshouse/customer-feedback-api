@@ -90,4 +90,22 @@ class CustomerFeedbackServiceTest {
     }
   }
 
+  @Test
+  void testCreateCustomerFeedbackDoesNotSendEmailWhenSourceUrlIsNull() throws Exception {
+    CustomerFeedbackDTO dtoWithNullSourceUrl =
+            helper.generateCustomerFeedbackDTO(EMAIL, FEEDBACK, NAME, KIND, null);
+    CustomerFeedbackDAO daoWithNullSourceUrl =
+            helper.generateCustomerFeedbackDAO(EMAIL, FEEDBACK, NAME, KIND, null, CREATED_AT, false);
+
+    when(customerFeedbackMapper.dtoToDao(any())).thenReturn(daoWithNullSourceUrl);
+    when(customerFeedbackRepository.insert(daoWithNullSourceUrl)).thenReturn(daoWithNullSourceUrl);
+
+    ReflectionTestUtils.setField(customerFeedbackService, "emailSendFlag", true);
+
+    // Should not throw NullPointerException
+    customerFeedbackService.createCustomerFeedback(dtoWithNullSourceUrl, REQUEST_ID);
+
+    verify(customerFeedbackRepository, times(1)).insert(daoWithNullSourceUrl);
+  }
+
 }
