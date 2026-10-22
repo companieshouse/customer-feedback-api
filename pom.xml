@@ -42,7 +42,7 @@
         <encoder.version>1.2.3</encoder.version>
         <testcontainers-bom.version>1.21.4</testcontainers-bom.version>
         <maven-failsafe-plugin.version>3.5.4</maven-failsafe-plugin.version>
-        <ch-boms.version>0.1.27</ch-boms.version>
+        <ch-boms.version>0.1.33</ch-boms.version>
     </properties>
 
     <profiles>
